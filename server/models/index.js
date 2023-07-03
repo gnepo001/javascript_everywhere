@@ -1,9 +1,11 @@
 // import Note from "./note";
 
-// const models = {
-//   Note,
-// };
+import Note from "./note.js";
 
-// export default models;
+const models = {
+  Note,
+};
 
-export { default as Note } from "./note.js";
+export default models;
+
+//export { default as Note } from "./note.js";
