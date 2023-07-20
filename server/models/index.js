@@ -4,6 +4,7 @@ import Note from "./note.js";
 
 const models = {
   Note,
+  User,
 };
 
 export default models;
