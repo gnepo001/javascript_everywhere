@@ -57,6 +57,30 @@ const Note = {
       throw new Error("Error creating account");
     }
   },
+
+  signIn: async (parent, { username, email, password }, { models }) => {
+    if (email) {
+      //normmalize email address
+      email = email.trim().toLowerCase();
+    }
+
+    const user = await models.User.findOne({
+      $or: [{ email }, { username }],
+    });
+
+    //if no user is found, throw an auth error
+    if (!user) {
+      throw new AuthenticationError("Error signing in");
+    }
+
+    //if passwords dont match throw and authentication error
+    const valid = await bcrypt.compare(password, user.password);
+    if (!valid) {
+      throw new AuthenticationError("Error siging in");
+    }
+    //create and return json web token
+    return jwt.sign({ id: user._id }, process.env.JWT_SECRET);
+  },
 };
 
 export default Note;
