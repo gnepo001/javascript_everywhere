@@ -1,14 +1,20 @@
 import bcrypt from "bcrypt";
+import mongoose from "mongoose";
 import jwt from "jsonwebtoken";
 import { AuthenticationError, ForbiddenError } from "apollo-server-express";
 import dotenv from "dotenv";
 import gravatar from "../util/gravatar.js";
 
 const Note = {
-  newNote: async (parent, args, { models }) => {
+  newNote: async (parent, args, { models, user }) => {
+    //if there is no user on the context, throw an auth error
+    if (!user) {
+      throw new AuthenticationError("You must be signed in to create a note");
+    }
     return await models.Note.create({
       content: args.content,
-      author: "Adam Scott",
+      //ref the author mongo id
+      author: new mongoose.Types.ObjectId(user.id),
     });
   },
   deleteNote: async (parent, { id }, { models }) => {
