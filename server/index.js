@@ -2,6 +2,7 @@ import express from "express";
 import { ApolloServer } from "apollo-server-express";
 import dotenv from "dotenv";
 import jwt from "jsonwebtoken";
+import helmet from "helmet";
 
 import db from "./db.js";
 import models from "./models/index.js";
@@ -14,6 +15,7 @@ const port = process.env.PORT || 4000;
 const DB_HOST = process.env.DB_HOST;
 
 const app = express();
+app.use(helmet());
 
 db.connect(DB_HOST);
 
