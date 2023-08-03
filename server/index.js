@@ -10,7 +10,6 @@ import { createComplexityLimitRule } from "graphql-validation-complexity";
 import db from "./db.js";
 import models from "./models/index.js";
 import typeDefs from "./schema.js";
-//import { resolvers } from "./resolvers/";
 import resolvers from "./resolvers/index.js";
 
 dotenv.config();
