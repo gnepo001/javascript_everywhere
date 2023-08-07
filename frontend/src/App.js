@@ -1,10 +1,11 @@
 import React from "react";
 
+import Pages from "./pages/index.js";
+
 const App = () => {
   return (
     <div>
-      <h1>Hello Notedly</h1>
-      <p>Welcome to the application</p>
+      <Pages />
     </div>
   );
 };
