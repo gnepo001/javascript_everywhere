@@ -8,7 +8,7 @@ import Pages from "./pages/index.js";
 //dotenv.config();
 
 //configure our api url and cache
-const uri = "http://localhost:40000/api";
+const uri = "http://localhost:4000/api";
 const cache = new InMemoryCache();
 
 //configure apollo client
