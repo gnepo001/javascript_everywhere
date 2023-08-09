@@ -1,5 +1,6 @@
 import React from "react";
 import { useQuery, gql } from "@apollo/client";
+import ReactMarkdown from "react-markdown";
 
 //our graphql query, stored as a variable
 const GET_NOTES = gql`
@@ -34,8 +35,18 @@ const Home = () => {
 
   return (
     <div>
-      {console.log(data)}
-      The data loaded!
+      {data.noteFeed.notes.map((note) => (
+        <article>
+          <img
+            src={note.author.avatar}
+            alt={`${note.author.username} avatar`}
+            height="50px"
+          />
+          {note.author.username} {note.createdAt} {note.favoriteCount}
+          {""}
+          <ReactMarkdown source={note.content} />
+        </article>
+      ))}
     </div>
   );
 };
