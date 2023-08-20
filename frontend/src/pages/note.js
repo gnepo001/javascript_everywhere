@@ -4,6 +4,8 @@ import { useQuery, gql } from "@apollo/client";
 
 import Note from "../components/Note.js";
 
+// graphql
+
 const GET_NOTE = gql`
   query note($id: ID!) {
     note(id: $id) {
@@ -20,7 +22,10 @@ const GET_NOTE = gql`
   }
 `;
 
+//brings id of param
+
 const NotePage = (props) => {
+  //get query of params in the url
   const { id } = useParams();
 
   const { loading, error, data } = useQuery(GET_NOTE, { variables: { id } });
