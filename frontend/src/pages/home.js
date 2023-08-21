@@ -34,7 +34,12 @@ const Home = () => {
   //if there is an error fetching the data, display an error message
   if (error) return <p>Error!</p>;
 
-  return <NoteFeed notes={data.noteFeed.notes} />;
+  return (
+    <div>
+      <NoteFeed notes={data.noteFeed.notes} />
+      {data.noteFeed.hasNextPage && <button>Load More</button>}
+    </div>
+  );
 };
 
 export default Home;
