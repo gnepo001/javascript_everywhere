@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 
 import Note from "./Note";
 
+//Note feed for page
 const NoteFeed = ({ notes }) => {
   return (
     <div>
