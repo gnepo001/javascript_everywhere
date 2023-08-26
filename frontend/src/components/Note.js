@@ -12,7 +12,10 @@ const Note = ({ note }) => {
         height="50px"
       />{" "}
       {note.author.username} {format(new Date(note.createdAt), "MMM dd yyyy")}{" "}
-      {note.favoriteCount} <ReactMarkdown source={note.content} />
+      {note.favoriteCount}
+      {/* <ReactMarkdown source={note.content} /> */}
+      <ReactMarkdown>{note.content}</ReactMarkdown>
+      {/* <p>{note.content}</p> */}
     </article>
   );
 };
