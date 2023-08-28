@@ -37,7 +37,33 @@ const Home = () => {
   return (
     <div>
       <NoteFeed notes={data.noteFeed.notes} />
-      {data.noteFeed.hasNextPage && <button>Load More</button>}
+      {data.noteFeed.hasNextPage && (
+        <button
+          onClick={() =>
+            fetchMore({
+              variables: {
+                cursor: data.noteFeed.cursor,
+              },
+              updateQuery: (previousResult, { fetchMoreResult }) => {
+                return {
+                  noteFeed: {
+                    cursor: fetchMoreResult.noteFeed.cursor,
+                    hasNextPage: fetchMoreResult.noteFeed.hasNextPage,
+                    // combine the new results and the old
+                    notes: [
+                      ...previousResult.noteFeed.notes,
+                      ...fetchMoreResult.noteFeed.notes,
+                    ],
+                    __typename: "noteFeed",
+                  },
+                };
+              },
+            })
+          }
+        >
+          Load more
+        </button>
+      )}
     </div>
   );
 };
