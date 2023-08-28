@@ -8,6 +8,7 @@ import Home from "./home.js";
 import MyNotes from "./mynotes.js";
 import Favorites from "./favorites.js";
 import NotePage from "./note.js";
+import Signup from "./signup.js";
 
 const Pages = () => {
   return (
@@ -19,6 +20,7 @@ const Pages = () => {
             <Route path="/mynotes" element={<MyNotes />} />
             <Route path="/favorites" element={<Favorites />} />
             <Route path="/note/:id" element={<NotePage />} />
+            <Route path="/signup" element={<Signup />} />
           </Routes>
         </Layout>
       </BrowserRouter>
