@@ -31,6 +31,8 @@ const Signup = (props) => {
     onCompleted: (data) => {
       // store the JWT in localStorage
       localStorage.setItem("token", data.signUp);
+      // redirect the user to the homepage
+      props.history.push("/");
     },
   });
 
