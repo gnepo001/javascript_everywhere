@@ -1,12 +1,8 @@
 import React from "react";
 
 //import dotenv from "dotenv";
-import {
-  ApolloClient,
-  ApolloProvider,
-  InMemoryCache,
-  createHttpLink,
-} from "@apollo/client";
+import { ApolloClient, ApolloProvider, createHttpLink } from "@apollo/client";
+import { InMemoryCache } from "apollo-cache-inmemory";
 import { setContext } from "apollo-link-context";
 
 import Pages from "./pages/index.js";
@@ -30,10 +26,18 @@ const authLink = setContext((_, { headers }) => {
 
 //configure apollo client
 const client = new ApolloClient({
-  uri,
+  link: authLink.concat(httpLink),
   cache,
+  resolvers: {},
   connectToDevTools: true,
 });
+
+// check for a local token
+const data = {
+  isLoggedIn: !!localStorage.getItem("token"),
+};
+// write the cache data on initial load
+cache.writeData({ data });
 
 const App = () => {
   return (

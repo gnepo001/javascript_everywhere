@@ -10,6 +10,7 @@ const SIGNUP_USER = gql`
 `;
 
 const Signup = (props) => {
+  const client = useApolloClient();
   const [values, setValues] = useState();
 
   const onChange = (event) => {
@@ -31,6 +32,9 @@ const Signup = (props) => {
     onCompleted: (data) => {
       // store the JWT in localStorage
       localStorage.setItem("token", data.signUp);
+      // update the local cache
+      //updates the apollo client, state manager like redux
+      client.writeData({ data: { isLoggedIn: true } });
       // redirect the user to the homepage
       props.history.push("/");
     },
