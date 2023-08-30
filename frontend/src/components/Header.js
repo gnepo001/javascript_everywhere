@@ -1,4 +1,5 @@
 import React from "react";
+import { Link, withRouter } from "react-router-dom";
 
 // new dependencies - allows for state from app.js
 import { useQuery, gql } from "@apollo/client";
@@ -13,12 +14,13 @@ const IS_LOGGED_IN = gql`
 
 const Header = (props) => {
   // query hook for user logged in state
-  const { data } = useQuery(IS_LOGGED_IN);
+  // including the client for refereencung the apollo store
+  const { data, client } = useQuery(IS_LOGGED_IN);
   return (
     <header>
       <div>
         {data.isLoggedIn ? (
-          <p>Log Out</p>
+          <button>Log Out</button>
         ) : (
           <p>
             <Link to={"/signin"}>Sign In</Link> or{" "}
@@ -31,4 +33,5 @@ const Header = (props) => {
   );
 };
 
-export default Header;
+// we wrap our component in the withRouter higher-order component
+export default withRouter(Header);
