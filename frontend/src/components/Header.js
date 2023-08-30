@@ -20,7 +20,20 @@ const Header = (props) => {
     <header>
       <div>
         {data.isLoggedIn ? (
-          <button>Log Out</button>
+          <button
+            onClick={() => {
+              // remove the token
+              localStorage.removeItem("token");
+              // clear the application's cache
+              client.resetStore();
+              // update local state
+              client.writeData({ data: { isLoggedIn: false } });
+              // redirect the user to the home page
+              props.history.push("/");
+            }}
+          >
+            Log Out
+          </button>
         ) : (
           <p>
             <Link to={"/signin"}>Sign In</Link> or{" "}
